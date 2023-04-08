@@ -1,0 +1,7 @@
+{
+  "name": "myblog_server",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "author": "prawira",
+  "license": "MIT"
+}
