@@ -41,6 +41,9 @@ fastify.setErrorHandler((error, request, reply) => {
       errors: error.issues,
     });
   }
+
+  fastify.log.error(error);
+  return reply.send(error);
 });
 
 fastify.get("/test", (request, reply) => {
