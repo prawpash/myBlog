@@ -4,6 +4,9 @@
   "main": "./src/index.ts",
   "author": "prawira",
   "license": "MIT",
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/node": "^18.15.11",
