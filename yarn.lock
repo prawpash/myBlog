@@ -18,6 +18,13 @@
     ajv-formats "^2.1.1"
     fast-uri "^2.0.0"
 
+"@fastify/busboy@^1.0.0":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@fastify/busboy/-/busboy-1.2.1.tgz#9c6db24a55f8b803b5222753b24fe3aea2ba9ca3"
+  integrity sha512-7PQA7EH43S0CxcOa9OeAnaeA0oQ+e/DHNPZwSQM9CQHW76jle5+OvLdibRp/Aafs9KXbLhxyjOTkRjWUbQEd3Q==
+  dependencies:
+    text-decoding "^1.0.0"
+
 "@fastify/deepmerge@^1.0.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@fastify/deepmerge/-/deepmerge-1.3.0.tgz#8116858108f0c7d9fd460d05a7d637a13fe3239a"
@@ -34,6 +41,20 @@
   integrity sha512-ypZynRvXA3dibfPykQN3RB5wBdEUgSGgny8Qc6k163wYPLD4mEGEDkACp+00YmqkGvIm8D/xYoHajwyEdWD/eg==
   dependencies:
     fast-json-stringify "^5.0.0"
+
+"@fastify/multipart@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@fastify/multipart/-/multipart-7.6.0.tgz#8b7baf00945509aac54d249424768c7c520ee741"
+  integrity sha512-mQoz0SMxk1WAYLYvQypoj3GYhCbmhnFl2LdleTzKQ4HgPfhVcMT014uln2wgzRh2y+gL74b/+j0mMVgvOKpqpQ==
+  dependencies:
+    "@fastify/busboy" "^1.0.0"
+    "@fastify/deepmerge" "^1.0.0"
+    "@fastify/error" "^3.0.0"
+    end-of-stream "^1.4.4"
+    fastify-plugin "^4.0.0"
+    hexoid "^1.0.0"
+    secure-json-parse "^2.4.0"
+    stream-wormhole "^1.1.0"
 
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.1.1"
@@ -380,7 +401,7 @@ emoji-regex@^8.0.0:
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
   integrity sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
 
-end-of-stream@^1.1.0:
+end-of-stream@^1.1.0, end-of-stream@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.4.4.tgz#5ae64a5f45057baf3626ec14da0ca5e4b2431eb0"
   integrity sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==
@@ -450,6 +471,11 @@ fast-uri@^2.0.0, fast-uri@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/fast-uri/-/fast-uri-2.2.0.tgz#519a0f849bef714aad10e9753d69d8f758f7445a"
   integrity sha512-cIusKBIt/R/oI6z/1nyfe2FvGKVTohVRfvkOhvx0nCEW+xf5NoCXjAHcWp93uOUBchzYcsvPlrapAdX1uW+YGg==
+
+fastify-plugin@^4.0.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-4.5.0.tgz#8b853923a0bba6ab6921bb8f35b81224e6988d91"
+  integrity sha512-79ak0JxddO0utAXAQ5ccKhvs6vX2MGyHHMMsmZkBANrq3hXc1CHzvNPHOcvTsVMEPl5I+NT+RO4YKMGehOfSIg==
 
 fastify@^4.15.0:
   version "4.15.0"
@@ -586,6 +612,11 @@ help-me@^4.0.1:
   dependencies:
     glob "^8.0.0"
     readable-stream "^3.6.0"
+
+hexoid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hexoid/-/hexoid-1.0.0.tgz#ad10c6573fb907de23d9ec63a711267d9dc9bc18"
+  integrity sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g==
 
 https-proxy-agent@^5.0.0:
   version "5.0.1"
@@ -1048,6 +1079,11 @@ split2@^4.0.0:
   resolved "https://registry.yarnpkg.com/split2/-/split2-4.2.0.tgz#c9c5920904d148bab0b9f67145f245a86aadbfa4"
   integrity sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==
 
+stream-wormhole@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/stream-wormhole/-/stream-wormhole-1.1.0.tgz#300aff46ced553cfec642a05251885417693c33d"
+  integrity sha512-gHFfL3px0Kctd6Po0M8TzEvt3De/xu6cnRrjlfYNhwbhLPLwigI2t1nc6jrzNuaYg5C4YF78PPFuQPzRiqn9ew==
+
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
@@ -1102,6 +1138,11 @@ tar@^6.1.11:
     minizlib "^2.1.1"
     mkdirp "^1.0.3"
     yallist "^4.0.0"
+
+text-decoding@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-decoding/-/text-decoding-1.0.0.tgz#38a5692d23b5c2b12942d6e245599cb58b1bc52f"
+  integrity sha512-/0TJD42KDnVwKmDK6jj3xP7E2MG7SHAOG4tyTgyUCRPdHwvkquYNLEQltmdMa3owq3TkddCVcTsoctJI8VQNKA==
 
 thread-stream@^2.0.0:
   version "2.3.0"
