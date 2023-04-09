@@ -2,6 +2,8 @@ import Fastify from "fastify";
 import { ZodError, z } from "zod";
 import * as dotenv from "dotenv";
 import userRoutes from "./modules/user/user.routes";
+import imageRoutes from "./modules/image/image.routes";
+import fastifyMultipart from "@fastify/multipart";
 dotenv.config();
 
 const envToLogger = {
@@ -46,11 +48,14 @@ fastify.setErrorHandler((error, request, reply) => {
   return reply.send(error);
 });
 
+fastify.register(fastifyMultipart);
+
 fastify.get("/test", (request, reply) => {
   return reply.send({ message: "Hello" });
 });
 
 fastify.register(userRoutes, { prefix: `${ROOT_PREFIX}/users` });
+fastify.register(imageRoutes, { prefix: `${ROOT_PREFIX}/images` });
 
 fastify.listen(
   { host: process.env.APP_HOST, port: process.env.APP_PORT },
