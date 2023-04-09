@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import { ZodError, z } from "zod";
 import * as dotenv from "dotenv";
+import userRoutes from "./modules/user/user.routes";
 dotenv.config();
 
 const envToLogger = {
@@ -15,6 +16,8 @@ const envToLogger = {
 const fastify = Fastify({
   logger: envToLogger[process.env.APP_ENV] ?? true,
 });
+
+const ROOT_PREFIX = `/api/v1`;
 
 fastify.setValidatorCompiler(({ schema }) => {
   return (data) => {
@@ -43,6 +46,8 @@ fastify.setErrorHandler((error, request, reply) => {
 fastify.get("/test", (request, reply) => {
   return reply.send({ message: "Hello" });
 });
+
+fastify.register(userRoutes, { prefix: `${ROOT_PREFIX}/users` });
 
 fastify.listen(
   { host: process.env.APP_HOST, port: process.env.APP_PORT },
