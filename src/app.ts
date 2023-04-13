@@ -1,5 +1,5 @@
 import Fastify from "fastify";
-import { ZodError, z } from "zod";
+import { ZodError } from "zod";
 import * as dotenv from "dotenv";
 import userRoutes from "./modules/user/user.routes";
 import imageRoutes from "./modules/image/image.routes";
