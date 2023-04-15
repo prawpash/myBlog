@@ -27,9 +27,13 @@ const ROOT_PREFIX = `/api/v1`;
 fastify.setValidatorCompiler(validatorCompiler);
 fastify.setSerializerCompiler(serializerCompiler);
 
+fastify.register(fastifyMultipart, {
+  limits: {
+    fileSize: 1_000_000, // 1MB
+  },
+  throwFileSizeLimit: true,
 });
 
-fastify.register(fastifyMultipart);
 fastify.get("/test", (_request, reply) => {
   return reply.send({ message: "Hello" });
 });
