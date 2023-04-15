@@ -1,8 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import path from "path";
 import { generateRandomId } from "../../utils/helper";
-import { createImage, findImageByName } from "./image.services";
+import { createImage, findImageById, findImageByName } from "./image.services";
 import { copyFile } from "fs/promises";
+import { idInput } from "../global/global.schema";
 
 const savedPath = path.join(__dirname, "../../../public/images");
 
@@ -44,4 +45,19 @@ export const createImageHandler = async (
     counter++;
   }
   throw new Error("Something went wrong, try again later.");
+};
+
+export const getImageByIdHandler = async (
+  request: FastifyRequest<{
+    Params: idInput;
+  }>,
+  reply: FastifyReply
+) => {
+  const params = request.params;
+
+  const image = await findImageById(params.id);
+
+  if (!image) reply.code(404).send({ message: "Image Data Not Found" });
+
+  return image;
 };

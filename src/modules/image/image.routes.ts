@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
-import { createImageHandler } from "./image.controllers";
+import { createImageHandler, getImageByIdHandler } from "./image.controllers";
 import { createImageResponseSchema } from "./image.schemas";
+import { idSchema } from "../global/global.schema";
 
 const imageRoutes = async (fastify: FastifyInstance) => {
   fastify.post(
@@ -13,6 +14,19 @@ const imageRoutes = async (fastify: FastifyInstance) => {
       },
     },
     createImageHandler
+  );
+
+  fastify.get(
+    "/:id",
+    {
+      schema: {
+        params: idSchema,
+        response: {
+          200: createImageResponseSchema,
+        },
+      },
+    },
+    getImageByIdHandler
   );
 };
 

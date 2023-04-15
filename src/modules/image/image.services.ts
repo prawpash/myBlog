@@ -17,3 +17,11 @@ export const findImageByName = async ({ name }: { name: string }) => {
     },
   });
 };
+
+export const findImageById = async (id: number) => {
+  return await prisma.image.findUnique({
+    where: {
+      id,
+    },
+  });
+};
