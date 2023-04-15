@@ -1,5 +1,8 @@
 import Fastify from "fastify";
-import { ZodError } from "zod";
+import {
+  serializerCompiler,
+  validatorCompiler,
+} from "fastify-type-provider-zod";
 import * as dotenv from "dotenv";
 import userRoutes from "./modules/user/user.routes";
 import imageRoutes from "./modules/image/image.routes";
@@ -21,36 +24,13 @@ const fastify = Fastify({
 
 const ROOT_PREFIX = `/api/v1`;
 
-fastify.setValidatorCompiler(({ schema }) => {
-  return (data) => {
-    const value = schema.parse(data);
-    return { value };
-  };
-});
+fastify.setValidatorCompiler(validatorCompiler);
+fastify.setSerializerCompiler(serializerCompiler);
 
-fastify.setSerializerCompiler(({ schema }) => {
-  return (data) => {
-    const value = schema.parse(data);
-
-    return JSON.stringify(value);
-  };
-});
-
-fastify.setErrorHandler((error, request, reply) => {
-  if (error instanceof ZodError) {
-    return reply.status(400).send({
-      message: "Validation Error",
-      errors: error.issues,
-    });
-  }
-
-  fastify.log.error(error);
-  return reply.send(error);
 });
 
 fastify.register(fastifyMultipart);
-
-fastify.get("/test", (request, reply) => {
+fastify.get("/test", (_request, reply) => {
   return reply.send({ message: "Hello" });
 });
 
