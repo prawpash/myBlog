@@ -14,5 +14,5 @@ export const getUserByIdHandler = async (
 
   if (!data) reply.code(404).send({ message: "User Data Not Found" });
 
-  reply.send(data);
+  return reply.send(data);
 };

@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { getUserByIdHandler } from "./user.controllers";
-import { idSchema } from "../global/global.schema";
 import { createUserResponseSchema } from "./user.schemas";
+import { idSchema } from "../global/global.schema";
 
 const userRoutes = async (fastify: FastifyInstance) => {
   fastify.get(
