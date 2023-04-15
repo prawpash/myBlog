@@ -1,4 +1,4 @@
-export const generateRandomId = ({ length = 8 }: { length: number }) => {
+export const generateRandomId = async (length: number = 16) => {
   const data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const dataLength = data.length;
   let randomId = "";
