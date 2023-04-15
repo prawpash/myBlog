@@ -1,12 +1,15 @@
+import path from "path";
 import Fastify from "fastify";
+import * as dotenv from "dotenv";
 import {
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
-import * as dotenv from "dotenv";
+import fastifyStatic from "@fastify/static";
+import fastifyMultipart from "@fastify/multipart";
 import userRoutes from "./modules/user/user.routes";
 import imageRoutes from "./modules/image/image.routes";
-import fastifyMultipart from "@fastify/multipart";
+
 dotenv.config();
 
 const envToLogger = {
@@ -22,7 +25,10 @@ const fastify = Fastify({
   logger: envToLogger[process.env.APP_ENV] ?? true,
 });
 
-const ROOT_PREFIX = `/api/v1`;
+fastify.register(fastifyStatic, {
+  root: path.join(__dirname, "../public/"),
+  prefix: "/public/",
+});
 
 fastify.setValidatorCompiler(validatorCompiler);
 fastify.setSerializerCompiler(serializerCompiler);
@@ -37,6 +43,8 @@ fastify.register(fastifyMultipart, {
 fastify.get("/test", (_request, reply) => {
   return reply.send({ message: "Hello" });
 });
+
+const ROOT_PREFIX = `/api/v1`;
 
 fastify.register(userRoutes, { prefix: `${ROOT_PREFIX}/users` });
 fastify.register(imageRoutes, { prefix: `${ROOT_PREFIX}/images` });
