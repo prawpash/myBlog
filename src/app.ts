@@ -1,10 +1,11 @@
 import path from "path";
-import Fastify from "fastify";
+import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import * as dotenv from "dotenv";
 import {
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
+import fastifyJwt from "@fastify/jwt";
 import fastifyStatic from "@fastify/static";
 import fastifyMultipart from "@fastify/multipart";
 import userRoutes from "./modules/user/user.routes";
@@ -30,8 +31,26 @@ fastify.register(fastifyStatic, {
   prefix: "/public/",
 });
 
+fastify.register(fastifyJwt, {
+  secret: {
+    private: process.env.PRIVATE_KEY,
+    public: process.env.PUBLIC_KEY,
+  },
+});
+
 fastify.setValidatorCompiler(validatorCompiler);
 fastify.setSerializerCompiler(serializerCompiler);
+
+fastify.decorate(
+  "authenticate",
+  async (request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      await request.jwtVerify();
+    } catch (error) {
+      return reply.send(error);
+    }
+  }
+);
 
 fastify.register(fastifyMultipart, {
   limits: {
