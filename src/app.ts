@@ -6,6 +6,7 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod";
 import fastifyJwt from "@fastify/jwt";
+import fastifyCookie from "@fastify/cookie";
 import fastifyStatic from "@fastify/static";
 import fastifyMultipart from "@fastify/multipart";
 import userRoutes from "./modules/user/user.routes";
@@ -36,7 +37,14 @@ fastify.register(fastifyJwt, {
     private: process.env.PRIVATE_KEY,
     public: process.env.PUBLIC_KEY,
   },
+  sign: { algorithm: "RS256", expiresIn: process.env.APP_TOKEN_LIFETIME },
+  cookie: {
+    cookieName: process.env.APP_COOKIE_TOKEN_NAME,
+    signed: false,
+  },
 });
+
+fastify.register(fastifyCookie);
 
 fastify.setValidatorCompiler(validatorCompiler);
 fastify.setSerializerCompiler(serializerCompiler);
