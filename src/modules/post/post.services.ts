@@ -1,6 +1,6 @@
 import { Status } from "@prisma/client";
 import prisma from "../../utils/prisma";
-import { createPostInput } from "./post.schemas";
+import { createPostInput, updatePostInput } from "./post.schemas";
 
 export const createPost = async (data: createPostInput, userId: number) => {
   const categories: Array<{
@@ -36,30 +36,32 @@ export const createPost = async (data: createPostInput, userId: number) => {
   return post;
 };
 
-export const updatePost = async (data: createPostInput, id: number) => {
+export const updatePost = async (data: updatePostInput, id: number) => {
   const categories: Array<{
     where: { name: string };
     create: { name: string };
   }> = [];
 
-  data.categories.forEach((category) => {
-    categories.push({
-      where: { name: category.name },
-      create: { name: category.name },
+  if (data?.categories) {
+    data.categories.forEach((category) => {
+      categories.push({
+        where: { name: category.name },
+        create: { name: category.name },
+      });
     });
-  });
+  }
 
   const post = await prisma.post.update({
     where: {
       id,
     },
     data: {
-      title: data.title,
-      slug: data.slug,
-      thumbnail: data.thumbnail,
-      content: data.content,
-      linked_images: data.linked_images ?? "",
-      status: data.status == "DRAFT" ? Status.DRAFT : Status.PUBLISH,
+      ...(data?.title && { title: data.title }),
+      ...(data?.slug && { slug: data.slug }),
+      ...(data?.thumbnail && { thumbnail: data.thumbnail }),
+      ...(data?.content && { content: data.content }),
+      ...(data?.linked_images && { linked_images: data.linked_images }),
+      ...(data?.status && { status: data.status }),
       categories: {
         connectOrCreate: categories,
       },
