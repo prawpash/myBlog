@@ -7,4 +7,8 @@ export const idSchema = z.object({
     .transform((val) => parseInt(val)),
 });
 
+export const messageSchema = z.object({
+  message: z.string(),
+});
+
 export type idInput = z.infer<typeof idSchema>;
