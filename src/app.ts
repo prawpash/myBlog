@@ -12,6 +12,7 @@ import fastifyMultipart from "@fastify/multipart";
 import userRoutes from "./modules/user/user.routes";
 import imageRoutes from "./modules/image/image.routes";
 import postRoutes from "./modules/post/post.routes";
+import categoryRoutes from "./modules/category/category.route";
 
 dotenv.config();
 
@@ -77,6 +78,7 @@ const ROOT_PREFIX = `/api/v1`;
 fastify.register(userRoutes, { prefix: `${ROOT_PREFIX}/users` });
 fastify.register(imageRoutes, { prefix: `${ROOT_PREFIX}/images` });
 fastify.register(postRoutes, { prefix: `${ROOT_PREFIX}/posts` });
+fastify.register(categoryRoutes, { prefix: `${ROOT_PREFIX}/categories` });
 
 fastify.listen(
   { host: process.env.APP_HOST, port: process.env.APP_PORT },
