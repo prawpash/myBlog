@@ -30,7 +30,8 @@ export const createPostHandler = async (
   while (isSlugDuplicate) {
     // Limit loop jika slug masih saja duplikat untuk kedua kalinya
     if (counter > 0) {
-      throw new Error("Something went wrong, try again later.");
+      //throw new Error("Something went wrong, try again later.");
+      throw new Error("Please define the slug.");
     }
 
     const now = new Date();

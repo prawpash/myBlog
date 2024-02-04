@@ -96,6 +96,9 @@ export const findPostByQuery = async ({
       ...(title && { title: { contains: title } }),
       ...(categories && { categories: { some: { AND: categories } } }),
     },
+    orderBy: {
+      updated_at: "desc"
+    }
   });
 
   return posts;
