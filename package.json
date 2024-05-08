@@ -8,14 +8,13 @@
     "seed": "ts-node ./prisma/seed.ts"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --exit-child ./src/app.ts"
+    "dev": "tsx watch ./src/app.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/node": "^18.15.11",
     "prisma": "^5.1.1",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.9.3",
     "typescript": "^5.0.4"
   },
   "dependencies": {
