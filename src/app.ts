@@ -13,6 +13,7 @@ import userRoutes from "./modules/user/user.routes";
 import imageRoutes from "./modules/image/image.routes";
 import postRoutes from "./modules/post/post.routes";
 import categoryRoutes from "./modules/category/category.route";
+import { ZodError } from "zod";
 
 dotenv.config();
 
@@ -50,6 +51,17 @@ fastify.register(fastifyCookie);
 
 fastify.setValidatorCompiler(validatorCompiler);
 fastify.setSerializerCompiler(serializerCompiler);
+fastify.setErrorHandler((error, request, reply) => {
+  if (error instanceof ZodError) {
+    return reply.code(error.statusCode ?? 500).send({
+      statusCode: error.statusCode ?? 500,
+      error: "Bad Request",
+      message: error.errors,
+    });
+  }
+
+  return reply.send(error);
+});
 
 fastify.decorate(
   "authenticate",
@@ -59,7 +71,7 @@ fastify.decorate(
     } catch (error) {
       return reply.send(error);
     }
-  }
+  },
 );
 
 fastify.register(fastifyMultipart, {
@@ -89,5 +101,5 @@ fastify.listen(
     }
 
     fastify.log.info(`Server running on ${address}`);
-  }
+  },
 );
